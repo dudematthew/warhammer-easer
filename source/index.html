@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="pl" class="has-navbar-fixed-top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="author" content="Mateusz Moczydłowski" />
+    <title>Isekai Easer</title>
+
+    <link rel="shortcut icon" href="./img/icon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./sass/main.sass" />
+    <link rel="stylesheet" href="./lib/fontawesome-free-5.12.0-web/css/all.css">
+    <link rel="stylesheet" href="../lib/bulma-pageloader-master/dist/css/bulma-pageloader.min.css">
+    <link rel="stylesheet" href="../lib/bulma-divider-master/dist/css/bulma-divider.min.css">
+    <link rel="stylesheet" href="../lib/selectize.js-master/dist/css/selectize.css">
+    <link rel="stylesheet" href="../lib/bulma-iconpicker-master/dist/css/bulma-iconpicker.min.css">
+</head>
+
+<body>
+
+    <!-- Page-loader start -->
+    <div class="pageloader">
+        <span class="title">
+            Wczytywanie
+        </span>
+    </div>
+    <!-- Page-loader end -->
+
+    <!-- Navbar start -->
+    <nav class="navbar is-size-5 has-text-black is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="#">
+                <img src="./img/logo.png" height="120" class="is-fullwidth">
+            </a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+
+                <!-- Hit location start -->
+                <div class="navbar-item has-dropdown has-text-white">
+                    <a class="navbar-link">
+                        Lokacja trafienia
+                    </a>
+
+                    <div class="navbar-dropdown">
+
+                        <div class="field">
+
+                            <label class="label">Typ istoty</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select>
+                                        <option>Stworzenie dwunożne</option>
+                                        <option>Stworzenie czworonożne humanoidalne</option>
+                                        <option>Stworzenie dwunożne skrzydlate</option>
+                                        <option>Stworzenie czworonożne skrzydlate</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Rzut kością</label>
+                            <div class="control">
+                                <input type="number" class="Normal input" placeholder="Podaj wynik...">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <button type="button" class="button">Oblicz</button>
+                                <button type="button" class="button">Losuj</button>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Wynik</label>
+                            <div class="control">
+                                <textarea class="textarea" id="hit-location-output" readonly></textarea>
+                            </div>
+                            <div class="control">
+                                <button value=""
+                                    class="button is-small is-fullwidth function-output-clear">wyczyść</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Hit location end -->
+
+                <!-- Drunk effect start -->
+                <div class="navbar-item has-dropdown has-text-white">
+                    <a class="navbar-link">
+                        Efekt pijaństwa
+                    </a>
+
+                    <div class="navbar-dropdown">
+
+                        <div class="field">
+                            <label class="label">Rzut kością</label>
+                            <div class="control">
+                                <input type="number" class="Normal input" placeholder="Podaj wynik...">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <button type="button" class="button">Oblicz</button>
+                                <button type="button" class="button">Losuj</button>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Wynik</label>
+                            <div class="control">
+                                <textarea class="textarea" readonly></textarea>
+                            </div>
+                            <div class="control">
+                                <button class="button is-small is-fullwidth">wyczyść</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Drunk effect end -->
+
+                <!-- Critical table start -->
+                <div class="navbar-item has-dropdown has-text-white">
+                    <a class="navbar-link">
+                        Tabelka krytyczna
+                    </a>
+
+                    <div class="navbar-dropdown">
+
+                        <div class="field">
+                            <label class="label">Lokacja trafienia</label>
+                            <div class="control">
+
+                                <button type="button" title="Losuj" value="select-hit-location-place"
+                                    class="button function-random-select">
+                                    <span class="icon is-medium has-text-dark">
+                                        <i class="fas fa-dice"></i>
+                                    </span>
+                                </button>
+                                <div class="select">
+                                    <select id="select-hit-location-place">
+                                        <option value="1">Głowa</option>
+                                        <option value="2">Korpus</option>
+                                        <option value="3">Ręka</option>
+                                        <option value="4">Noga</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Wartość</label>
+                            <div class="select">
+                                <select>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                    <option value="4">+4</option>
+                                    <option value="5">+5</option>
+                                    <option value="6">+6</option>
+                                    <option value="7">+7</option>
+                                    <option value="8">+8</option>
+                                    <option value="9">+9</option>
+                                    <option value="10">+10</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Rzut kością</label>
+                            <div class="control">
+                                <input type="number" class="Normal input" placeholder="Podaj wynik...">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <button type="button" class="button">Oblicz</button>
+                                <button type="button" class="button">Losuj</button>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Wynik</label>
+                            <div class="control">
+                                <textarea class="textarea" readonly></textarea>
+                            </div>
+                            <div class="control">
+                                <button class="button is-small is-fullwidth">wyczyść</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Critical table end -->
+
+                <!-- Chaos mutation start -->
+                <div class="navbar-item has-dropdown has-text-white">
+                    <a class="navbar-link">
+                        Mutacja Chaosu
+                    </a>
+
+                    <div class="navbar-dropdown">
+
+                        <div class="field">
+                            <label class="label">Rzut kością</label>
+                            <div class="control">
+                                <input type="number" class="Normal input" placeholder="Podaj wynik...">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <button type="button" class="button">Oblicz</button>
+                                <button type="button" class="button">Losuj</button>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Wynik</label>
+                            <div class="control">
+                                <textarea class="textarea" readonly></textarea>
+                            </div>
+                            <div class="control">
+                                <button class="button is-small is-fullwidth">wyczyść</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chaos mutation end -->
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary">
+                            <strong>?</strong>
+                        </a>
+                        <a class="button is-danger">
+                            <strong>?</strong>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar end -->
+
+    <!-- Content tabs start -->
+    <div class="tabs-with-content">
+        <div class="tabs is-centered is-toggle is-medium hasbackinfo">
+            <ul>
+                <li class="has-text-white">
+                    <a class="has-text-white">
+                        <span class="icon is-small"><i class="fas fa-plus" aria-hidden="true"></i></i></span>
+                        <span>Tworzenie bytu</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="has-text-white">
+                        <span class="icon is-small"><i class="fas fa-stream" aria-hidden="true"></i></span>
+                        <span>Kolejka</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="has-text-white">
+                        <span class="icon is-small"><i class="fas fa-cogs" aria-hidden="true"></i></span>
+                        <span>Ustawienia</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <!-- entity creator start -->
+            <section class="tab-content">
+                <div class="tile is-parent has-background-white">
+                    <div class="tile is-child">
+                        <div class="tile is-parent">
+                            <div class="tile is-child is-half">
+                                <section class="hero is-white">
+                                    <div class="hero-body">
+                                        <div class="container">
+                                            <h1 class="title">
+                                                Tworzenie bytu
+                                            </h1>
+                                            <h2 class="subtitle">
+                                                Stwórz postać, która będzie uczestniczyć w sesji
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="tile is-child is-half">
+                                <div class="tile is-parent is-size-3 is-vertical">
+                                    <div class="tile is-child">
+                                        <div class="tile is-parent">
+                                            <div class="tile is-child">
+                                                <p class="title">Opcje</p>
+                                                <div class="buttons">
+                                                    <button class="button is-success modal-button"
+                                                        data-target="modal-library-settings">
+                                                        <span class="icon">
+                                                            <i class="fas fa-book-open"></i>
+                                                        </span>
+                                                        <span>Biblioteki Postaci</span>
+                                                    </button>
+                                                    <button class="button is-info modal-button" data-target="modal-stats-randomizer">
+                                                        <span class="icon">
+                                                            <i class="fas fa-dice-d20"></i>
+                                                        </span>
+                                                        <span>Losowanie statystyk</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tile is-child">
+                                        <div class="tile is-parent">
+                                            <div class="tile is-child">
+                                                <p class="title">Zapisz</p>
+                                                <div class="field has-addons">
+                                                    <div class="control has-icons-left">
+                                                        <input type="text" class="input has-text-white" value="Brak bibliotek" disabled>
+                                                        <div class="icon is-small is-left">
+                                                            <i class="fas fa-list"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control has-icons-left is-hidden">
+                                                        <div class="select">
+                                                            <select>
+                                                                <option disabled selected>Wybierz bibliotekę
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="icon is-small is-left">
+                                                            <i class="fas fa-list"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control has-icons-left is-hidden">
+                                                        <div class="select">
+                                                            <select>
+                                                                <option disabled selected>Wybierz schemat</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="icon is-small is-left">
+                                                            <i class="fas fa-list"></i>
+                                                        </div>
+                                                    </div>
+                                                    <p class="control">
+                                                        <button class="button is-info" disabled>Zastosuj</button>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tile is-child">
+                                        <div class="tile is-parent">
+                                            <div class="tile is-child">
+                                                <p class="title">Załaduj</p>
+                                                <div class="field has-addons">
+                                                    <div class="control has-icons-left">
+                                                        <div class="select">
+                                                            <select>
+                                                                <option selected>Warhammer 2ed</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="icon is-small is-left">
+                                                            <i class="fas fa-list"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control has-icons-left">
+                                                        <div class="select">
+                                                            <select>
+                                                                <option disabled selected>Wybierz schemat</option>
+                                                                <option>Zombie</option>
+                                                                <option>Skaven</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="icon is-small is-left">
+                                                            <i class="fas fa-list"></i>
+                                                        </div>
+                                                    </div>
+                                                    <p class="control">
+                                                        <button class="button is-info">Zastosuj</button>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box is-invisible"></div>
+                <div class="box has-background-dark">
+                    <div class="tile is-ancestor">
+                        <div class="tile is-vertical is-9">
+                            <div class="tile">
+                                <div class="tile is-parent is-vertical">
+                                    <article class="tile is-child notification is-primary">
+                                        <p class="title is-half">Opis i nazwa</p>
+                                        <input type="text" class="input is-large has-text-weight-bold"
+                                            placeholder="Nazwa...">
+                                        <textarea
+                                            class="content is-fullwidth box has-text-black box description-input is-size-6"
+                                            style="width: 100%" placeholder="Opis"></textarea>
+                                    </article>
+                                    <article class="tile is-child notification is-primary">
+                                        <p class="title is-half">Parametry</p>
+                                        <div class="tile is-parent">
+                                            <div class="tile is-horizontal">
+                                                <div class="control has-icons-left">
+                                                    <input type="text" class="input" placeholder="Rasa...">
+                                                    <div class="icon is-small is-left" style="color: black;">
+                                                        <i class="fas fa-fingerprint"></i>
+                                                    </div>
+                                                </div>
+                                                <button
+                                                    class="button button-checkbox button-checkbox-info has-icons-left"
+                                                    onclick="ToggleShowHaurioData(this);">
+                                                    <span class="icon">
+                                                        <i class="fas fa-hospital-symbol"></i>
+                                                    </span>
+                                                    <span>Posiada Haurio</span>
+                                                </button>
+                                                <div class="control has-icons-left">
+                                                    <input type="color" class="input" value="#e66465">
+                                                    <div class="icon is-small is-left">
+                                                        <i class="fas fa-fill-drip"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <article class="tile is-child notification is-warning">
+                                        <p class="title">Cechy główne</p>
+                                        <table class="table is-striped is-narrow is-fullwidth is-size-5 box">
+                                            <thead>
+                                                <tr>
+                                                    <th class="attribute-name">WW</th>
+                                                    <th class="attribute-name">US</th>
+                                                    <th class="attribute-name">K</th>
+                                                    <th class="attribute-name">Odp</th>
+                                                    <th class="attribute-name">Zr</th>
+                                                    <th class="attribute-name">Int</th>
+                                                    <th class="attribute-name">SW</th>
+                                                    <th class="attribute-name">Ogd</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                            </tbody>
+                                        </table>
+                                    </article>
+                                </div>
+                                <div class="tile is-parent is-vertical">
+                                    <article class="tile is-child notification is-info">
+                                        <div class="level">
+                                            <div class="level-left">
+                                                <div class="level-item">
+                                                    <p class="title">Pancerz</p>
+                                                </div>
+                                            </div>
+                                            <div class="level-right">
+                                                <div class="level-item">
+                                                    <button class="button is-success">
+                                                        <span class="icon is-small">
+                                                            <i class="fas fa-plus"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table class="table is-striped is-narrow is-fullwidth box">
+                                            <thead>
+                                                <tr>
+                                                    <th class="attribute-name">Głowa</th>
+                                                    <th class="attribute-name">Korpus</th class="attribute-name">
+                                                    <th class="attribute-name">L.&nbsp;Ręka</th class="attribute-name">
+                                                    <th class="attribute-name">P.&nbsp;Ręka</th class="attribute-name">
+                                                    <th class="attribute-name">L.&nbsp;Noga</th class="attribute-name">
+                                                    <th class="attribute-name">P.&nbsp;Noga</th class="attribute-name">
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                            </tbody>
+                                        </table>
+                                        <div class="level">
+                                            <div class="level-left">
+                                                <div class="level-item">
+                                                    <p class="title">Broń</p>
+                                                </div>
+                                            </div>
+                                            <div class="level-right">
+                                                <div class="level-item">
+                                                    <button class="button is-success">
+                                                        <span class="icon is-small">
+                                                            <i class="fas fa-plus"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table class="table table is-striped is-narrow is-fullwidth box">
+                                            <thead>
+                                                <tr>
+                                                    <th class="attribute-name">Nazwa</th class="attribute-name">
+                                                    <th class="attribute-name">Siła</th class="attribute-name">
+                                                    <th class="attribute-name">Cechy</th class="attribute-name">
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="text" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <textarea type="textarea"
+                                                            class="attribute-number is-size-5"></textarea>
+                                                    </th>
+                                            </tbody>
+                                        </table>
+                                    </article>
+                                    <article class="tile is-child notification is-warning">
+                                        <p class="title">Cechy drugorzędne</p>
+                                        <table class="table is-striped is-narrow is-fullwidth is-size-5 box">
+                                            <thead>
+                                                <tr>
+                                                    <th class="attribute-name">A</th>
+                                                    <th class="attribute-name">Żyw</th>
+                                                    <th class="attribute-name">S</th>
+                                                    <th class="attribute-name">Wt</th>
+                                                    <th class="attribute-name">Sz</th>
+                                                    <th class="attribute-name">Mag</th>
+                                                    <th class="attribute-name">PO</th>
+                                                    <th class="attribute-name">PP</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5"
+                                                            disabled>
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5"
+                                                            disabled>
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                                    <th class="is-marginless is-paddingless">
+                                                        <input type="number" class="attribute-number is-size-5">
+                                                    </th>
+                                            </tbody>
+                                        </table>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tile is-parent is-vertical">
+                            <article class="tile is-child notification is-success">
+                                <div class="tile is-parent is-vertical">
+                                    <div class="tile is-child">
+                                        <div class="content">
+                                            <div class="level">
+                                                <div class="level-left">
+                                                    <div class="level-item">
+                                                        <p class="title">Umiejętności</p>
+                                                    </div>
+                                                </div>
+                                                <div class="level-right">
+                                                    <div class="level-item">
+                                                        <button class="button is-info">
+                                                            <span class="icon is-small">
+                                                                <i class="fas fa-plus"></i>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <select multiple placeholder="Wybierz umiejętności">
+                                                <option value="1">Hazard</option>
+                                                <option value="2">Hipnoza</option>
+                                                <option value="3">Czytanie z Warg</option>
+                                                <option value="4">Dowodzenie</option>
+                                                <option value="5">Jeździectwo</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="tile is-child">
+                                        <div class="content">
+                                            <div class="level">
+                                                <div class="level-left">
+                                                    <div class="level-item">
+                                                        <p class="title">Zdolności</p>
+                                                    </div>
+                                                </div>
+                                                <div class="level-right">
+                                                    <div class="level-item">
+                                                        <button class="button is-info">
+                                                            <span class="icon is-small">
+                                                                <i class="fas fa-plus"></i>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <select multiple placeholder="Wybierz zdolności">
+                                                <option value="1">Hazard</option>
+                                                <option value="2">Hipnoza</option>
+                                                <option value="3">Czytanie z Warg</option>
+                                                <option value="4">Dowodzenie</option>
+                                                <option value="5">Jeździectwo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="tile is-child notification" style="background-color: #4ECDC4;">
+                                <div class="content">
+                                    <p class="title">Ekwipunek</p>
+                                    <textarea class="textarea"></textarea>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="tile is-ancestor" id="haurio-tile">
+                        <div class="tile is-5 is-vertical is-parent">
+                            <div class="tile is-child box">
+                                <div class="tile is-parent">
+                                    <div class="tile is-child is-vertical">
+                                        <div class="tile is-parent">
+                                            <div class="tile is-child">
+                                                <div class="level">
+                                                    <div class="level-left">
+                                                        <div class="level-item">
+                                                            <p class="title">Haurio</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="level-right">
+                                                        <div class="level-item">
+                                                            <button
+                                                                class="button button-checkbox button-checkbox-black">Posiada
+                                                                Qi</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="control has-icons-left">
+                                                        <div class="select">
+                                                            <select>
+                                                                <option disabled selected>Wybierz dziedzinę</option>
+                                                                <option value="1">Krzepa</option>
+                                                                <option value="1">Odporność</option>
+                                                                <option value="1">Walka wręcz</option>
+                                                                <option value="1">Siła Woli</option>
+                                                                <option value="1">Inteligencja</option>
+                                                                <option value="1">Ogłada</option>
+                                                                <option value="1">Umiejętności Strzeleckie</option>
+                                                                <option value="1">Zręczność</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="icon is-small is-left">
+                                                            <i class="fas fa-chart-pie"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="control has-icons-left">
+                                                        <input type="number" class="input"
+                                                            placeholder="Poziom / Ilość punktów utrzymania...">
+                                                        <div class="icon is-small is-left">
+                                                            <i class="fab fa-superpowers"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tile is-child is-vertical">
+                                        <div class="tile is-parent">
+                                            <div class="tile is-child">
+                                                <div class="level">
+                                                    <div class="level-left">
+                                                        <div class="level-item">
+                                                            <p class="title">Qi</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="level-right">
+                                                        <div class="level-item">
+                                                            <button
+                                                                class="button button-checkbox button-checkbox-info">Posiada
+                                                                Qi</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="control">
+                                                        <textarea class="textarea"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tile is-child box">
+                                <p class="title">Umiejętności</p>
+
+                                <div class="tile is-parent is-horizontal">
+                                    <div class="tile is-child is-vertical">
+                                        <div class="dropdown is-up">
+
+                                            <div class="dropdown-trigger">
+                                                <button class="button" aria-haspopup="true"
+                                                    aria-controls="dropdown-menu2">
+                                                    <span>Content</span>
+                                                    <span class="icon is-small">
+                                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+                                                <div class="dropdown-content is-size-1">
+                                                    <div class="dropdown-item">
+                                                        <p>You can insert <strong>any type of content</strong> within
+                                                            the
+                                                            dropdown menu.</p>
+                                                    </div>
+                                                    <hr class="dropdown-divider">
+                                                    <div class="dropdown-item">
+                                                        <p>You simply need to use a <code>&lt;div&gt;</code> instead.
+                                                        </p>
+                                                    </div>
+                                                    <hr class="dropdown-divider">
+                                                    <a href="#" class="dropdown-item">
+                                                        This is a link
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tile is-child is-vertical">
+                                        <div class="dropdown is-up">
+
+                                            <div class="dropdown-trigger">
+                                                <button class="button" aria-haspopup="true"
+                                                    aria-controls="dropdown-menu2">
+                                                    <span>Content</span>
+                                                    <span class="icon is-small">
+                                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+                                                <div class="dropdown-content is-large">
+                                                    <div class="dropdown-item">
+                                                        <p>You can insert <strong>any type of content</strong> within
+                                                            the
+                                                            dropdown menu.</p>
+                                                    </div>
+                                                    <hr class="dropdown-divider">
+                                                    <div class="dropdown-item">
+                                                        <p>You simply need to use a <code>&lt;div&gt;</code> instead.
+                                                        </p>
+                                                    </div>
+                                                    <hr class="dropdown-divider">
+                                                    <a href="#" class="dropdown-item">
+                                                        This is a link
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tile is-parent">
+                            <div class="tile is-child box">
+                                <p class="title">Poziom Haurio</p>
+                                <table class="table is-striped has-text-centered is-narrow is-fullwidth is-size-5 box">
+                                    <thead>
+                                        <tr>
+                                            <th class="attribute-name has-text-centered"></th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-fist-raised"></i>
+                                                </span>
+                                                <span>WW</span>
+                                            </th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-eye"></i>
+                                                </span>
+                                                <span>US</span>
+                                            </th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-dumbbell"></i>
+                                                </span>
+                                                <span>K</span>
+                                            </th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-shield-alt"></i>
+                                                </span>
+                                                <span>Odp</span>
+                                            </th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-running"></i>
+                                                </span>
+                                                <span>Zr</span>
+                                            </th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-brain"></i>
+                                                </span>
+                                                <span>Int</span>
+                                            </th>
+                                            </th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-user-shield"></i>
+                                                </span>
+                                                <span>SW</span>
+                                            </th>
+                                            </th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-comments"></i>
+                                                </span>
+                                                <span>Ogd</span>
+                                            </th>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th class="is-marginless is-paddingless">
+                                                <span>Poziom</span>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5">
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5">
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5">
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5">
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5">
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5">
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5">
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th class="is-marginless is-paddingless">
+                                                <span>Wartość</span>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th class="is-marginless is-paddingless">
+                                                <span>Suma</span>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="title">Cechy Haurio</p>
+                                <table class="table is-striped is-narrow is-fullwidth is-size-5 box input-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-angle-double-right"></i>
+                                                </span>
+                                                <span>A</span>
+                                            </th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-heart"></i>
+                                                </span>
+                                                <span>Żyw</span>
+                                            </th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-bomb"></i>
+                                                </span>
+                                                <span>S</span>
+                                            </th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-battery-half"></i>
+                                                </span>
+                                                <span>Wt</span>
+                                            </th>
+                                            <th class="attribute-name">
+                                                <span class="icon">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                </span>
+                                                <span>Sz</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5">
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5">
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5" disabled>
+                                            </th>
+                                            <th class="is-marginless is-paddingless">
+                                                <input type="number" class="attribute-number is-size-5">
+                                            </th>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile is-parent is-horizontal">
+                        <div class="tile is-child">
+                            <button class="button is-large is-fullwidth is-success is-hoverable">
+                                <span class="icon is-large">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                                <span>Dodaj do kolejki</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Entity creator end -->
+            </section>
+            <section class="tab-content">
+                <!--Que Start-->
+                <div class="tile is-parent has-background-white">
+                    <div class="tile is-child">
+                        <div class="tile is-parent">
+                            <div class="tile is-child is-half">
+                                <section class="hero is-white">
+                                    <div class="hero-body">
+                                        <div class="container">
+                                            <h1 class="title">
+                                                Kolejka
+                                            </h1>
+                                            <h2 class="subtitle">
+                                                Zarządzaj wykreowanymi bytami
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="tile is-child is-half">
+                                <div class="tile is-parent is-size-3 is-vertical">
+                                    <div class="tile is-child">
+                                        <div class="tile is-parent">
+                                            <div class="tile is-child">
+                                                <p class="title">Opcje</p>
+                                                <div class="buttons">
+                                                    <button class="button is-primary">
+                                                        <span class="icon">
+                                                            <i class="fas fa-dice"></i>
+                                                        </span>
+                                                        <span>Losuj inicjatywę</span>
+                                                    </button>
+                                                    <button class="button is-danger">
+                                                        <span class="icon">
+                                                            <i class="fas fa-trash"></i>
+                                                        </span>
+                                                        <span>Usuń wszystkie byty</span>
+                                                    </button>
+                                                    <button class="button is-success">
+                                                        <span class="icon">
+                                                            <i class="fas fa-save"></i>
+                                                        </span>
+                                                        <span>Zapisz kolejkę</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tile is-child">
+                                        <div class="tile is-parent">
+                                            <div class="tile is-child">
+                                                <p class="title">Załaduj kolejkę</p>
+                                                <div class="field has-addons has-text-weight-bold">
+                                                    <div class="control has-icons-left">
+                                                        <div class="file has-name">
+                                                            <label class="file-label">
+                                                                <input class="file-input" type="file" accept=".json"
+                                                                    name="resume">
+                                                                <span class="file-cta">
+                                                                    <span class="file-icon">
+                                                                        <i class="fas fa-upload"></i>
+                                                                    </span>
+                                                                    <span class="file-label">
+                                                                        Załaduj plik...
+                                                                    </span>
+                                                                </span>
+                                                                <span class="file-name">
+                                                                    ...
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Que End-->
+            </section>
+            <section class="tab-content">
+                <!--Settings Start-->
+                <div class="tile is-parent has-background-white">
+                    <div class="tile is-child">
+                        <div class="tile is-parent">
+                            <div class="tile is-child is-half">
+                                <section class="hero is-white">
+                                    <div class="hero-body">
+                                        <div class="container">
+                                            <h1 class="title">
+                                                Ustawienia
+                                            </h1>
+                                            <h2 class="subtitle">
+                                                Zarządzaj aplikacją i jej zachowaniem
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="tile is-child is-half">
+                                <div class="tile is-parent is-size-3 is-vertical">
+                                    <div class="tile is-child">
+                                        <div class="tile is-parent">
+                                            <div class="tile is-child">
+                                                <p class="title">Opcje</p>
+                                                <div class="buttons">
+                                                    <button class="button is-success">
+                                                        <span class="icon">
+                                                            <i class="fas fa-save"></i>
+                                                        </span>
+                                                        <span>Zapisz Ustawienia</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tile is-child">
+                                        <div class="tile is-parent">
+                                            <div class="tile is-child">
+                                                <p class="title">Wczytaj ustawienia</p>
+                                                <div class="field has-addons has-text-weight-bold">
+                                                    <div class="control has-icons-left">
+                                                        <div class="file has-name">
+                                                            <label class="file-label">
+                                                                <input class="file-input" type="file" accept=".json"
+                                                                    name="resume">
+                                                                <span class="file-cta">
+                                                                    <span class="file-icon">
+                                                                        <i class="fas fa-upload"></i>
+                                                                    </span>
+                                                                    <span class="file-label">
+                                                                        Załaduj plik...
+                                                                    </span>
+                                                                </span>
+                                                                <span class="file-name">
+                                                                    ...
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Settings End-->
+            </section>
+        </div>
+    </div>
+    <!-- Content tabs end -->
+
+
+
+
+    <!-- Footer start -->
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Warhammer Isekai Easer</strong> stworzony przez <a href="https://github.com/dudematthew"
+                    target="_blank">Mateusza Moczydłowskiego</a>. Kod źródłowy licencjonowany przez
+                <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>. Prawdziwe liczby
+                losowe generowane przez
+                <a href="http://www.random.org" target="_blank">RANDOM.ORG</a>.
+            </p>
+        </div>
+    </footer>
+    <!-- Footer end -->
+
+    <!-- Notification start -->
+    <div class="modal" id="function-notification-modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <article class="message is-">
+                <div class="message-header">
+                    Info
+                </div>
+                <div class="message-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque risus mi, tempus quis placerat
+                    ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et
+                    dictum felis venenatis efficitur. Aenean ac eleifend lacus, in mollis lectus. Donec sodales, arcu et
+                    sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna,
+                    vehicula et sem eget, facilisis sodales sem.
+                </div>
+            </article>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    <!-- Notification end -->
+
+    <!-- Library Settings start -->
+    <div class="modal" id="modal-library-settings">
+        <div class="modal-background" aria-label="close modal-close" data-target="modal-library-settings"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title has-text-white">
+                    <span class="icon">
+                        <i class="fas fa-book-open"></i>
+                    </span>
+                    &nbsp; Biblioteki Postaci
+                </p>
+                <button class="delete" aria-label="close modal-close" data-target="modal-library-settings"></button>
+            </header>
+            <section class="modal-card-body has-text-black">
+                <h1 class="title is-size-4">Załaduj Bibliotekę</h1>
+                <div class="field has-addons has-text-weight-bold">
+                    <div class="control has-icons-left">
+                        <div class="file has-name">
+                            <label class="file-label">
+                                <input class="file-input" type="file" accept=".json" name="resume">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Załaduj plik...
+                                    </span>
+                                </span>
+                                <span class="file-name">
+                                    ...
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <p class="control">
+                        <button class="button is-info">Załaduj</button>
+                    </p>
+                </div>
+                <div class="box is-invisible"></div>
+                <h1 class="title is-size-4">Załadowane Biblioteki</h1>
+                <div class="list has-text-weight-bold">
+                    <div class="list-item is-active">
+                        Warhammer 2 edycja <span class="has-text-dark is-pulled-right">(biblioteka podstawowa)</span>
+                    </div>
+                    <div class="list-item has-background-white clickable is-hoverable">
+                        <a class="link" title="Edytuj bibliotekę">Isekai</a>
+                        <button class="delete is-pulled-right" title="Usuń Bibliotekę"></button>
+                    </div>
+                    <div class="list-item has-background-white clickable is-hoverable">
+                        <a class="link" title="Edytuj bibliotekę">Bossowie</a>
+                        <button class="delete is-pulled-right" title="Usuń Bibliotekę"></button>
+                    </div>
+                    <div class="list-item has-background-white clickable is-hoverable">
+                        <a class="link" title="Edytuj bibliotekę">Kampania 1</a>
+                        <button class="delete is-pulled-right" title="Usuń Bibliotekę"></button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- Library Settings end -->
+
+    <!-- Stats Randomizer start -->
+    <div class="modal" id="modal-stats-randomizer">
+        <div class="modal-background" aria-label="close modal-close" data-target="modal-library-settings"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title has-text-white">
+                    <span class="icon">
+                        <i class="fas fa-dice-d20"></i>
+                    </span>
+                    &nbsp; Losowanie Statystyk
+                </p>
+                <button class="delete" aria-label="close modal-close" data-target="modal-stats-randomizer"></button>
+            </header>
+            <section class="modal-card-body has-text-black">
+                <h1 class="title is-size-4">Operacje</h1>
+            </section>
+        </div>
+    </div>
+    <!-- Stats Randomizer end -->
+
+    <!-- Scripts start -->
+    <!-- <script src="../lib/jQuery/jQuery-development.js"></script> -->
+    <!-- <script src="../lib/BulmaJS-0.11.0/dist/bulma.js"></script> -->
+    <!-- <script src="../lib/selectize.js-master/dist/js/selectize.min.js"></script> -->
+    <!-- <script src="../source/js/class/Randomizer.js"></script> -->
+    <!-- <script src="./js/class/App.js"></script>
+    <script src="./js/functions.js"></script>
+    <script src="./js/behaviours.js"></script> -->
+    <script src="./js/main.js"></script>
+    <!-- Scripts end -->
+</body>
+
+</html>

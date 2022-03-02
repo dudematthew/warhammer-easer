@@ -1,0 +1,28 @@
+{
+  "name": "warhammer-isekai-easer",
+  "version": "1.0.0",
+  "description": "Potentialy powerful application created for RPG DM",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev": "parcel source/index.html",
+    "build": "parcel build source/index.html"
+  },
+  "keywords": [
+    "warhammer",
+    "rpg"
+  ],
+  "author": "dudematthew",
+  "license": "MIT",
+  "devDependencies": {
+    "@vizuaalog/bulmajs": "^0.12.1",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.26.8"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "selectize": "^0.12.6"
+  }
+}
