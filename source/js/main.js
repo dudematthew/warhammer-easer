@@ -15,7 +15,7 @@ window.$ = window.jQuery = require("jquery");
  * 
  * https://vuejs.org/guide
  */
-// import "vue";
+import { createApp } from 'vue';
 
 // https://selectize.dev/docs.html
 import "../../node_modules/selectize/dist/js/selectize";
@@ -29,24 +29,19 @@ import 'bulma-iconpicker';
 // https://fontawesome.com/icons
 import "@fortawesome/fontawesome-free";
 
-import Randomizer from "./class/randomizer";
+// Vue components
+import App from '../components/app.vue'
 
+import Randomizer from "./randomizer";
 window.randomizer = new Randomizer();
 
 $(function () {
     $("select[multiple]").selectize();
 });
 
-// new VueElement({
-//     el: "#dice_throw",
-//     data: {
-//     },
-//     methods: {
-//         throwDice: function (dice) {
-//             console.error("działa XD");
-//         }
-//     }
-// });
+const app = createApp(App);
+
+app.mount("#app");
 
 $(document).on("load", () => {
     

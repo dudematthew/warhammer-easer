@@ -8,11 +8,11 @@
     <meta name="author" content="Mateusz Moczydłowski" />
     <title>Isekai Easer</title>
 
-    <link rel="shortcut icon" href="./img/icon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/img/icon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./sass/main.sass" />
 </head>
 
-<body>
+<body id="app">
 
     <!-- Page-loader start -->
     <div class="pageloader">
@@ -26,7 +26,7 @@
     <nav class="navbar is-size-5 has-text-black is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item navbar-logo" href="#">
-                <img src="./img/logo.png" height="120" class="is-fullwidth">
+                <img src="./assets/img/logo.png" height="120" class="is-fullwidth">
             </a>
 
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
@@ -48,7 +48,7 @@
 
                     <div id="dice_throw" class="navbar-dropdown">
 
-                        <label class="label">{{test}}</label>
+                        <label class="label">Kości</label>
 
                         <div class="field has-addons">
                             <div class="control has-icons-left">
@@ -61,7 +61,7 @@
                                 <input type="text" class="input" value="1" placeholder="Ilość...">
                             </div>
                             <div class="control">
-                                <button class="button is-dark" v-on:click="throwDice(100)">Rzuć</button>
+                                <button class="button" v-on:click="throwDice(100)">Rzuć</button>
                             </div>
                         </div>
 
@@ -76,7 +76,7 @@
                                 <input type="text" class="input" value="1" placeholder="Ilość...">
                             </div>
                             <div class="control">
-                                <button class="button is-dark">Rzuć</button>
+                                <button class="button">Rzuć</button>
                             </div>
                         </div>
 
@@ -91,7 +91,7 @@
                                 <input type="text" class="input has-text-black" value="1" placeholder="Ilość...">
                             </div>
                             <div class="control">
-                                <button class="button is-dark">Rzuć</button>
+                                <button class="button">Rzuć</button>
                             </div>
                         </div>
 
@@ -367,6 +367,9 @@
                                                 <h2 class="subtitle">
                                                     Stwórz postać, która będzie uczestniczyć w sesji
                                                 </h2>
+                                                <div id="app">
+                                                    content {{data}}
+                                                </div>
                                             </div>
                                         </div>
                                     </section>
