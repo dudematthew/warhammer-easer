@@ -12,19 +12,27 @@ $tabs-toggle-link-active-border-color: $background
 $tabs-toggle-link-hover-border-color: $background
 $tabs-toggle-link-border-color: $background
 
-@import "../../lib/bulma-0.8.0/bulma"
-// @import "../../lib/bulma-prefers-dark-master/bulma-prefers-dark"
+@import ./imports.sass
 
 // ----------------------------------------------
 
 textarea, input
     outline: none
 
+.footer
+    border-bottom: 3px solid $link !important
+
 .option
     cursor: pointer
 
 .is-secondary
     background-color: #4ECDC4
+
+.no-select
+  user-select: none
+  -moz-user-select: none
+  -webkit-user-select: none
+
 
 .navbar-dropdown
     padding: 10px
@@ -56,14 +64,30 @@ input
     &[disabled]
         background-color: white
 
-.tabs-with-content .tabs:not(:last-child)
-  margin-bottom: 0
+.tabs-content li.tab-content
+    display: none
+    list-style: none
 
 
-.tabs-with-content .tab-content
-  padding: 1rem
-  display: none
+.tabs-content li.is-active.tab-content
+    display: block
+
+.tabs-content
+    border-top: 3px solid $link
+
+.tabs a
+    border: none !important
+    border-bottom-left-radius: 0 !important
+    border-bottom-right-radius: 0 !important
+
+// .tabs-with-content .tabs:not(:last-child)
+//   margin-bottom: 0
 
 
-.tabs-with-content .tab-content.is-active
-  display: block
+// .tabs-with-content .tab-content
+//   padding: 1rem
+//   display: none
+
+
+// .tabs-with-content .tab-content.is-active
+//   display: block
