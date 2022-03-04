@@ -5,3 +5,4 @@ lib
 dist
 concept.txt
 old
+package-lock.json
