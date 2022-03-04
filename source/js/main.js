@@ -30,7 +30,7 @@ import 'bulma-iconpicker';
 import "@fortawesome/fontawesome-free";
 
 // Vue components
-import App from '../components/app.vue'
+import VueDiceThrow from '../components/header/dice-throw.vue'
 
 import Randomizer from "./randomizer";
 window.randomizer = new Randomizer();
@@ -39,9 +39,7 @@ $(function () {
     $("select[multiple]").selectize();
 });
 
-const app = createApp();
-
-app.mount("#dice_throw");
+const app = createApp(VueDiceThrow).mount("#dice_throw");
 
 $(document).on("load", () => {
     

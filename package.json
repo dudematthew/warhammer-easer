@@ -2,10 +2,6 @@
   "name": "warhammer-isekai-easer",
   "version": "1.0.0",
   "description": "Potentialy powerful application created for RPG DM",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
     "start": "npm run dev",
     "dev": "parcel source/index.html",
