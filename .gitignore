@@ -6,3 +6,4 @@ dist
 concept.txt
 old
 package-lock.json
+.parcel-cache

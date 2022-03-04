@@ -1,5 +1,5 @@
 // https://www.npmjs.com/package/regenerator-runtime
-import 'regenerator-runtime/runtime'
+// import 'regenerator-runtime/runtime'
 
 // https://api.jquery.com/
 window.$ = window.jQuery = require("jquery");
@@ -39,9 +39,9 @@ $(function () {
     $("select[multiple]").selectize();
 });
 
-const app = createApp(App);
+const app = createApp();
 
-app.mount("#app");
+app.mount("#dice_throw");
 
 $(document).on("load", () => {
     
