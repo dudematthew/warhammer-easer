@@ -10,18 +10,17 @@
             };
         },
         methods: {
-            throwDice (dice, amount) {
+            async throwDice (dice, amount) {
                 if (!Number.isInteger(dice) || dice < 2) {
                     this.output += `✋ Rzucaj kością większą od 1\n`;
                     return;
                 }
                     
-                let result = Math.floor(Math.random() * dice) + 1;
-
                 if (amount > 1)
                     this.addDividerOutput(dice, amount);
 
                 for (let i = 0; i < amount; i++) {
+                    let result = await randomizer.getRandomNumber(1, dice);
                     this.addDiceOutput(dice, result, amount > 1);
                 }
             },
@@ -85,7 +84,7 @@
                 <input type="number" class="input" v-model="d100Amount" placeholder="Ilość...">
             </div>
             <div class="control">
-                <button class="button" @click="throwDice(100, dXAmount)">Rzuć</button>
+                <button class="button" @click="throwDice(100, d100Amount)">Rzuć</button>
             </div>
         </div>
 
@@ -100,7 +99,7 @@
                 <input type="number" class="input" v-model="d10Amount" placeholder="Ilość...">
             </div>
             <div class="control">
-                <button class="button" @click="throwDice(10, dXAmount)">Rzuć</button>
+                <button class="button" @click="throwDice(10, d10Amount)">Rzuć</button>
             </div>
         </div>
 

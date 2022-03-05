@@ -13,8 +13,6 @@ export default class Randomizer {
         let randomNumberSetKey = this.getNumberSetKey(from, to);
         let randomNumberSet = (randomNumberSetKey != null) ? this.randomNumberSets[randomNumberSetKey] : null;
 
-        console.error(this.randomNumberSets);
-        
         if (randomNumberSet != null) {
             if (randomNumberSet.numbers.length <= this.randomNumbersKeepAmount*(this.neededPercentToRefill/100))
                 this.refillRandomNumbers(from, to);
@@ -24,7 +22,7 @@ export default class Randomizer {
             return await this.getRandomNumber(from, to);
         }
     }
-
+    
     /**
      * Get saved number set key
      * or if doesn't exists returns null

@@ -29,11 +29,11 @@ import 'bulma-iconpicker';
 // https://fontawesome.com/icons
 import "@fortawesome/fontawesome-free";
 
-// Vue components
-import VueDiceThrow from '../components/header/dice-throw.vue'
-
 import Randomizer from "./randomizer";
 window.randomizer = new Randomizer();
+
+// Vue components
+import VueDiceThrow from '../components/header/dice-throw.vue'
 
 $(function () {
     $("select[multiple]").selectize();
