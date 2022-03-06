@@ -1,5 +1,5 @@
 $primary: #FFED7A
-$secondary-color: #4ECDC4
+$secondary-color: #246C8F
 $link: #A27A49
     
 $family-primary: "Segoe UI light"
@@ -12,7 +12,8 @@ $tabs-toggle-link-active-border-color: $background
 $tabs-toggle-link-hover-border-color: $background
 $tabs-toggle-link-border-color: $background
 
-@import ./imports.sass
+@import ./imports
+@import ./animations
 
 // ----------------------------------------------
 
@@ -68,7 +69,6 @@ input
     display: none
     list-style: none
 
-
 .tabs-content li.is-active.tab-content
     display: block
 
@@ -79,6 +79,10 @@ input
     border: none !important
     border-bottom-left-radius: 0 !important
     border-bottom-right-radius: 0 !important
+
+textarea
+    margin-bottom: 0 !important
+    padding-bottom: 0 !important
 
 // .tabs-with-content .tabs:not(:last-child)
 //   margin-bottom: 0

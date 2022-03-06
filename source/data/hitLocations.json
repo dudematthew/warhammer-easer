@@ -1,0 +1,54 @@
+[
+    {
+        "id": "1",
+        "name": "Stworzenie dwunożne",
+        "values": [
+            {"from": 1, "to": 15, "effect": "Głowa"},
+            {"from": 16, "to": 35, "effect": "Prawe ramię"},
+            {"from": 36, "to": 55, "effect": "Lewe ramię"},
+            {"from": 56, "to": 80, "effect": "Korpus"},
+            {"from": 81, "to": 90, "effect": "Prawa noga"},
+            {"from": 90, "to": 100, "effect": "Lewa noga"}
+        ]
+    },
+    {
+        "id": "2",
+        "name": "Stworzenie czworonożne humanoidalne",
+        "values": [
+            {"from": 1, "to": 10, "effect": "Głowa"},
+            {"from": 11, "to": 20, "effect": "Prawe ramię"},
+            {"from": 21, "to": 30, "effect": "Lewe ramię"},
+            {"from": 31, "to": 60, "effect": "Korpus"},
+            {"from": 61, "to": 70, "effect": "Prawa przednia noga"},
+            {"from": 71, "to": 80, "effect": "Lewa przednia noga"},
+            {"from": 81, "to": 90, "effect": "Prawa tylna noga"},
+            {"from": 91, "to": 100, "effect": "Lewa tylna noga"}
+        ]
+    },
+    {
+        "id": "3",
+        "name": "Stworzenie dwunożne skrzydlate",
+        "values": [
+            {"from": 1, "to": 15, "effect": "Głowa"},
+            {"from": 16, "to": 35, "effect": "Prawe skrzydło"},
+            {"from": 36, "to": 55, "effect": "Lewe skrzydło"},
+            {"from": 56, "to": 80, "effect": "Korpus"},
+            {"from": 81, "to": 90, "effect": "Prawa noga"},
+            {"from": 91, "to": 100, "effect": "Lewa noga"}
+        ]
+    },
+    {
+        "id": "4",
+        "name": "Stworzenie czworonożne skrzydlate",
+        "values": [
+            {"from": 1, "to": 10, "effect": "Głowa"},
+            {"from": 11, "to": 20, "effect": "Prawe skrzydło"},
+            {"from": 21, "to": 30, "effect": "Lewe skrzydło"},
+            {"from": 31, "to": 60, "effect": "Korpus"},
+            {"from": 61, "to": 70, "effect": "Prawa przednia noga"},
+            {"from": 71, "to": 80, "effect": "Lewa przednia noga"},
+            {"from": 81, "to": 90, "effect": "Prawa tylna noga"},
+            {"from": 91, "to": 100, "effect": "Lewa tylna noga"}
+        ]
+    }
+]

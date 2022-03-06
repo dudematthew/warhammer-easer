@@ -32,15 +32,24 @@ import "@fortawesome/fontawesome-free";
 import Randomizer from "./randomizer";
 window.randomizer = new Randomizer();
 
+import "./behaviours";
+
 // Vue components
-import VueDiceThrow from '../components/header/dice-throw.vue'
+import VueDiceThrow from '../components/header/dice-throw.vue';
+import VueHitLocation from '../components/header/hit-location.vue';
+import VueDrunkEffect from '../components/header/drunk-effect.vue';
+import VueCriticalEffect from '../components/header/critical-effect.vue';
+
+createApp(VueDiceThrow).mount("#dice_throw");
+createApp(VueHitLocation).mount("#hit_location");
+createApp(VueDrunkEffect).mount("#drunk_effect");
+createApp(VueCriticalEffect).mount("#critical_effect");
+
 
 $(function () {
     $("select[multiple]").selectize();
 });
 
-const app = createApp(VueDiceThrow).mount("#dice_throw");
-
 $(document).on("load", () => {
-    
+    console.error("window loaded");
 });

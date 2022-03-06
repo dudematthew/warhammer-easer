@@ -1,6 +1,24 @@
+
 export default class Randomizer {
+    
+    /**
+     * Allows efficient use of www.random.org true
+     * random numbers with ability to store numbers
+     * in memory in advance for next calls
+     * 
+     * TODO: add checking if quota is used up from API
+     * https://www.random.org/quota/?format=plain
+     * 
+     * @param {int} randomNumbersKeepAmount how
+     * many numbers to refill to memory in one
+     * number set
+     * @param {int} neededPercentToRefill how
+     * low amount of numbers in memory in one
+     * set is needed to refill
+     */
     constructor(randomNumbersKeepAmount = 10, neededPercentToRefill = 20) {
         this.randomNumbersKeepAmount = randomNumbersKeepAmount;
+        this.neededPercentToRefill = neededPercentToRefill;
         this.randomNumberSets = [];
     }
 
@@ -14,8 +32,9 @@ export default class Randomizer {
         let randomNumberSet = (randomNumberSetKey != null) ? this.randomNumberSets[randomNumberSetKey] : null;
 
         if (randomNumberSet != null) {
-            if (randomNumberSet.numbers.length <= this.randomNumbersKeepAmount*(this.neededPercentToRefill/100))
+            if (randomNumberSet.numbers.length <= this.randomNumbersKeepAmount*(this.neededPercentToRefill/100)) {
                 this.refillRandomNumbers(from, to);
+            }
             return randomNumberSet.numbers.pop();
         } else {
             await this.refillRandomNumbers(from, to);

@@ -1,67 +1,76 @@
 <script>
-    export default {
-        data () {
-            return {
-                output: "",
-                d10Amount: 1,
-                d100Amount: 1,
-                dXAmount: 1,
-                dXValue: 20
-            };
-        },
-        methods: {
-            async throwDice (dice, amount) {
-                if (!Number.isInteger(dice) || dice < 2) {
-                    this.output += `✋ Rzucaj kością większą od 1\n`;
-                    return;
-                }
-                    
-                if (amount > 1)
-                    this.addDividerOutput(dice, amount);
-
-                for (let i = 0; i < amount; i++) {
-                    let result = await randomizer.getRandomNumber(1, dice);
-                    this.addDiceOutput(dice, result, amount > 1);
-                }
-            },
-            addDiceOutput (dice, result, tabbed) {
-                this.output += `${tabbed ? "   " : ""}🎲 [K${dice}] ${result}\n`;
-                this.$refs.output.scrollTop = this.$refs.output.scrollHeight;
-            },
-            addDividerOutput (dice, amount) {
-                this.output += `💠 Rzucono ${amount} x K${dice}:\n`
-            },
-            clearOutput () {
-                this.output = "";
+export default {
+    data () {
+        return {
+            output: "",
+            d10Amount: 1,
+            d100Amount: 1,
+            dXAmount: 1,
+            dXValue: 20
+        };
+    },
+    methods: {
+        async throwDice (dice, amount) {
+            if (!Number.isInteger(dice) || dice < 2) {
+                this.output += `✋ Rzucaj kością większą od 1\n`;
+                return;
+            }
+                
+            if (amount > 1)
+                this.addDividerOutput(dice, amount);
+            for (let i = 0; i < amount; i++) {
+                let result = await randomizer.getRandomNumber(1, dice);
+                this.addDiceOutput(dice, result, amount > 1);
             }
         },
-        watch: {
-            d10Amount (val) {
-                if (val < 1 && Number.isInteger(val))
-                    this.d10Amount = 1;
-                else if (!Number.isInteger(val))
-                    this.d10Amount = parseInt(this.d10Amount);
-            },
-            d100Amount (val) {
-                if (val < 1 && Number.isInteger(val))
-                    this.d100Amount = 1;
-                else if (!Number.isInteger(val))
-                    this.d100Amount = parseInt(this.d100Amount);
-            },
-            dXAmount (val) {
-                if (val < 1 && Number.isInteger(val))
-                    this.dXAmount = 1;
-                else if (!Number.isInteger(val))
-                    this.dXAmount = parseInt(this.dXAmount);
-            },
-            dXValue (val) {
-                if (val < 1 && Number.isInteger(val))
-                    this.dXValue = 1;
-                else if (!Number.isInteger(val))
-                    this.dXValue = parseInt(this.dXValue);
-            }
+        addDiceOutput (dice, result, tabbed) {
+            this.output += `${tabbed ? "   " : ""}🎲 [K${dice}] ${result}\n`;
+        },
+        addDividerOutput (dice, amount) {
+            this.output += `💠 Rzucono ${amount} x K${dice}:\n`
+        },
+        scrollOutputToBottom () {
+            this.$nextTick(function () {
+                this.$refs.output.scrollTop = this.$refs.output.scrollHeight - 20
+                this.$refs.output.scrollTo({top: this.$refs.output.scrollHeight, behavior: 'smooth'});
+            });
+        },
+        clearOutput () {
+            this.output = "";
         }
-    };
+    },
+    watch: {
+        d10Amount (val) {
+            if (val < 1 && Number.isInteger(val))
+                this.d10Amount = 1;
+            else if (!Number.isInteger(val))
+                this.d10Amount = parseInt(this.d10Amount);
+        },
+        d100Amount (val) {
+            if (val < 1 && Number.isInteger(val))
+                this.d100Amount = 1;
+            else if (!Number.isInteger(val))
+                this.d100Amount = parseInt(this.d100Amount);
+        },
+        dXAmount (val) {
+            if (val < 1 && Number.isInteger(val))
+                this.dXAmount = 1;
+            else if (!Number.isInteger(val))
+                this.dXAmount = parseInt(this.dXAmount);
+        },
+        dXValue (val) {
+            if (val < 1 && Number.isInteger(val))
+                this.dXValue = 1;
+            else if (!Number.isInteger(val))
+                this.dXValue = parseInt(this.dXValue);
+        },
+        output (val) {
+            this.scrollOutputToBottom();
+
+            return val.trim();
+        }
+    }
+};
 </script>
 
 <template>
