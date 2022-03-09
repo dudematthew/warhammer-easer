@@ -1,13 +1,17 @@
-<template>
-  <div>Hello {{ name }}!</div>
-</template>
-
 <script>
+  import Navbar from './navbar/navbar.vue';
+  import Tabs from './tabs/tabs.vue'
+
   export default {
-    data() {
-      return {
-        name: "Vue",
-      };
-    },
+    name: "App",
+    components: { Navbar, Tabs },
   };
 </script>
+
+<template>
+
+  <Navbar />
+
+  <Tabs />
+
+</template>

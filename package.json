@@ -1,6 +1,6 @@
 {
   "name": "warhammer-isekai-easer",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Potentialy powerful application created for RPG DM",
   "scripts": {
     "start": "npm run dev",

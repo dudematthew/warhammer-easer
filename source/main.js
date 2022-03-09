@@ -18,7 +18,7 @@ window.$ = window.jQuery = require("jquery");
 import { createApp } from 'vue';
 
 // https://selectize.dev/docs.html
-import "../../node_modules/selectize/dist/js/selectize";
+import "selectize";
 
 // https://bulmajs.tomerbe.co.uk/docs
 import Bulma from '@vizuaalog/bulmajs';
@@ -29,22 +29,15 @@ import 'bulma-iconpicker';
 // https://fontawesome.com/icons
 import "@fortawesome/fontawesome-free";
 
-import Randomizer from "./randomizer";
+import Randomizer from "./js/randomizer";
 window.randomizer = new Randomizer();
 
-import "./behaviours";
-
 // Vue components
-import VueDiceThrow from '../components/header/dice-throw.vue';
-import VueHitLocation from '../components/header/hit-location.vue';
-import VueDrunkEffect from '../components/header/drunk-effect.vue';
-import VueCriticalEffect from '../components/header/critical-effect.vue';
+import App from './components/app.vue'
 
-createApp(VueDiceThrow).mount("#dice_throw");
-createApp(VueHitLocation).mount("#hit_location");
-createApp(VueDrunkEffect).mount("#drunk_effect");
-createApp(VueCriticalEffect).mount("#critical_effect");
+createApp(App).mount("#app");
 
+import "./js/behaviours";
 
 $(function () {
     $("select[multiple]").selectize();
