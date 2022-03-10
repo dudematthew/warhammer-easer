@@ -1,25 +1,25 @@
 <script>
-import Entity from './entity.vue';
+    import Entity from './entity.vue';
 
-export default {
-    mounted () {
-        let thisss = this;
-        setInterval(() => {
-            console.log(this.entities[0].name);
-        }, 5000);
-    },
-    components: {Entity},
-    data () {
-        return {
-            entities: [
-                {
-                    name: "Hades"
-                }
-            ]
+    export default {
+        components: {
+            Entity
+        },
+        data() {
+            return {
+                entities: [
+                    {
+                        name: "Hades",
+                        color: "#eb4034"
+                    },
+                    {
+                        name: "Marek",
+                        color: "#ffa"
+                    }
+                ]
+            }
         }
     }
-}
-
 </script>
 
 <template>
@@ -61,12 +61,6 @@ export default {
                                                 </span>
                                                 <span>Usuń wszystkie byty</span>
                                             </button>
-                                            <button class="button is-success">
-                                                <span class="icon">
-                                                    <i class="fas fa-save"></i>
-                                                </span>
-                                                <span>Zapisz kolejkę</span>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +69,7 @@ export default {
                                 <div class="tile is-parent">
                                     <div class="tile is-child">
                                         <p class="title">Załaduj kolejkę</p>
-                                        <div class="field has-addons has-text-weight-bold">
+                                        <div class="field has-addons has-text-weight-bold mr-2">
                                             <div class="control has-icons-left">
                                                 <div class="file has-name">
                                                     <label class="file-label">
@@ -96,6 +90,14 @@ export default {
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="field">
+                                            <button class="button is-success">
+                                                <span class="icon">
+                                                    <i class="fas fa-save"></i>
+                                                </span>
+                                                <span>Zapisz kolejkę</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -106,16 +108,13 @@ export default {
         </div>
         <div class="box is-invisible"></div>
         <div class="box has-background-dark">
-            <div class="tile is-ancestor">
-                <div class="tile is-vertical">
-                    <div class="tile">
-                        <div class="tile is-parent is-vertical" v-for="entity in entities">
-                            <Entity :data="entity" />
-                        </div>
-                    </div>
+            <div class="tile is-ancestor is-vertical">
+                <div class="tile is-vertical mb-5" v-for="entity in entities">
+                    <Entity :data="entity" />
                 </div>
             </div>
         </div>
+        <div class="box is-invisible"></div>
         <!--Que End-->
     </li>
 </template>
