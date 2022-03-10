@@ -10,11 +10,23 @@
                 entities: [
                     {
                         name: "Hades",
-                        color: "#eb4034"
-                    },
-                    {
-                        name: "Marek",
-                        color: "#ffa"
+                        color: "#eb4034",
+                        stats: {
+                            ws: 10, // Weapon Skill
+                            bs: 10, // Ballistic Skill
+                            s: 10, // Strength
+                            t: 10, // Toughness
+                            ag: 10, // Agility
+                            int: 10, // Inteligence
+                            wp: 10, // Will Power
+                            fel: 10, // Fellowship
+                            a: 1, // Attacks
+                            w: 12, // Wounds
+                            m: 5, // Movement
+                            mag: 0, // Magic
+                            ip: 0, // Instanity Points
+                            fp: 1 // Fate Points
+                        }
                     }
                 ]
             }
@@ -47,27 +59,6 @@
                             <div class="tile is-child">
                                 <div class="tile is-parent">
                                     <div class="tile is-child">
-                                        <p class="title">Opcje</p>
-                                        <div class="buttons">
-                                            <button class="button is-primary">
-                                                <span class="icon">
-                                                    <i class="fas fa-dice"></i>
-                                                </span>
-                                                <span>Losuj inicjatywę</span>
-                                            </button>
-                                            <button class="button is-danger">
-                                                <span class="icon">
-                                                    <i class="fas fa-trash"></i>
-                                                </span>
-                                                <span>Usuń wszystkie byty</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tile is-child">
-                                <div class="tile is-parent">
-                                    <div class="tile is-child">
                                         <p class="title">Załaduj kolejkę</p>
                                         <div class="field has-addons has-text-weight-bold mr-2">
                                             <div class="control has-icons-left">
@@ -96,6 +87,27 @@
                                                     <i class="fas fa-save"></i>
                                                 </span>
                                                 <span>Zapisz kolejkę</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tile is-child">
+                                <div class="tile is-parent">
+                                    <div class="tile is-child">
+                                        <p class="title">Opcje</p>
+                                        <div class="buttons">
+                                            <button class="button is-primary">
+                                                <span class="icon">
+                                                    <i class="fas fa-dice"></i>
+                                                </span>
+                                                <span>Losuj inicjatywę</span>
+                                            </button>
+                                            <button class="button is-danger">
+                                                <span class="icon">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                                <span>Usuń wszystkie byty</span>
                                             </button>
                                         </div>
                                     </div>
