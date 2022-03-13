@@ -1,11 +1,11 @@
 <script>
     import CreateEntity from './create-entity/create-entity.vue'
-    import Que from './que/que.vue'
+    import Queue from './queue/queue.vue'
     import Settings from './settings.vue'
 
     export default {
         name: "Tabs",
-        components: {CreateEntity, Que, Settings}
+        components: {CreateEntity, Queue, Settings}
     };
 </script>
 
@@ -37,7 +37,7 @@
             <!-- entity creator start -->
             <ul>
                 <CreateEntity />
-                <Que />
+                <Queue />
                 <Settings />
             </ul>
         </div>

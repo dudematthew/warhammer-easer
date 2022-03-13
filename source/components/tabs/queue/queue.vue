@@ -41,7 +41,7 @@
 
 <template>
     <li class="tab-content">
-        <!--Que Start-->
+        <!--Queue Start-->
         <div class="tile is-parent has-background-white">
             <div class="tile is-child">
                 <div class="tile is-parent">
@@ -132,6 +132,6 @@
             </div>
         </div>
         <div class="box is-invisible"></div>
-        <!--Que End-->
+        <!--Queue End-->
     </li>
 </template>
