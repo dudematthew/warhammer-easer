@@ -17,8 +17,8 @@ window.$ = window.jQuery = require("jquery");
  */
 import { createApp } from 'vue';
 
-// https://selectize.dev/docs.html
-import "selectize";
+// https://github.com/vueform/multiselect
+import '@vueform/multiselect'
 
 // https://bulmajs.tomerbe.co.uk/docs
 import Bulma from '@vizuaalog/bulmajs';
@@ -29,19 +29,15 @@ import 'bulma-iconpicker';
 // https://fontawesome.com/icons
 import "@fortawesome/fontawesome-free";
 
-import Randomizer from "./js/randomizer";
+import Randomizer from "./lib/randomizer";
 window.randomizer = new Randomizer();
 
 // Vue components
 import App from './components/app.vue'
 
-createApp(App).mount("#app");
+let app = createApp(App).mount("#app");
 
-import "./js/behaviours";
-
-$(function () {
-    $("select[multiple]").selectize();
-});
+import "./lib/behaviours";
 
 $(document).on("load", () => {
     console.error("window loaded");

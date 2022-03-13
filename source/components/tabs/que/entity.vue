@@ -1,19 +1,39 @@
 <script>
+    import Multiselect from '@vueform/multiselect';
+
     export default {
         props: ['data'],
-        mounted () {
-            this.setRandomInitiative();
+        components: {
+            Multiselect
         },
         data() {
             return {
-                isExpaned: false,
-                isDead: false
+                isExpaned: true, // temp
+                isDead: false,
+                testSkillsDb: {
+                    5: 'Siema'
+                },
+                testSkills: [5]
             }
+        },
+        mounted() {
+            this.setRandomInitiative();
+            this.data.stats.tempW = this.data.stats.w;
+
+            let thisTest = this;
+
+            setInterval(() => {
+                console.log(thisTest.testSkills, thisTest.testSkillsDb);
+            }, 5000);
         },
         methods: {
             handleNameInput(e) {
                 this.data.name = e.target.innerHTML.replace(/(?:^(?:&nbsp;)+)|(?:(?:&nbsp;)+$)/g, '');
                 console.log(this.data.name);
+            },
+            handleRaceInput(e) {
+                this.data.race = e.target.innerHTML.replace(/(?:^(?:&nbsp;)+)|(?:(?:&nbsp;)+$)/g, '');
+                console.log(this.data.race);
             },
             async setRandomInitiative() {
                 this.data.stats.initiative = this.data.stats.ag + parseInt(await randomizer.getRandomNumber(1, 10));
@@ -24,13 +44,27 @@
 
 
 <template>
-    <div class="tile box is-parent notification is-white is-vertical" :style="{'border': '2px solid' + data.color}">
+    <div class="tile box is-parent box is-white is-vertical" :style="{'border': '2px solid' + data.color}">
         <div class="tile is-child ">
             <nav class="level">
                 <!-- Left side -->
                 <div class="level-left">
                     <div class="level-item">
+                        <p class="icon is-large title">
+                            <i v-if="data.stats.tempW == 0" class="fa-solid fa-user-injured"></i>
+                            <i v-else class="fa-solid fa-user"></i>
+                        </p>
+                    </div>
+                    <div class="level-item">
                         <p class="title is-half" contenteditable @input="handleNameInput">{{data.name}}</p>
+                    </div>
+                    <div class="level-item">
+                        <div class="icon is-size-5 pt-1" style="color: black;">
+                            <i class="fas fa-fingerprint"></i>
+                        </div>
+                    </div>
+                    <div class="level-item">
+                        <p class="title is-half" contenteditable @input="handleRaceInput">{{data.race}}</p>
                     </div>
                 </div>
 
@@ -58,7 +92,7 @@
                             </span>
                         </button>
                     </p>
-                    <p class="level-item" v-if="!isDead" >
+                    <p class="level-item" v-if="!isDead">
                         <div class="dropdown is-right">
                             <div class="dropdown-trigger">
                                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
@@ -162,7 +196,8 @@
                         </div>
                         <div class="column is-2">
                             <p class="control has-icons-left">
-                                <input class="input is-primary" type="number" v-model="data.stats.initiative" placeholder="Inicjatywa">
+                                <input class="input is-primary" type="number" v-model="data.stats.initiative"
+                                    placeholder="Inicjatywa">
                                 <span class="icon is-left has-text-dark">
                                     <i class="fa-solid fa-arrow-down-short-wide"></i>
                                 </span>
@@ -174,7 +209,7 @@
         </div>
         <div class="tile is-child" v-if="!isDead">
             <div class="tile is-parent box has-background-dark">
-                <div class="tile is-child is-6">
+                <div class="tile is-child">
                     <div class="field is-grouped">
                         <p class="control">
                             <button class="button">
@@ -218,20 +253,192 @@
                         </p>
                     </div>
                 </div>
-                <div class="tile is-child is-6">
-                    <div class="field is-grouped">
-                        <div class="control has-icons-left">
-                            <div class="select">
-                                <select>
-                                    <option selected>Miecz</option>
-                                    <option>Topór</option>
-                                    <option>Łuk</option>
-                                </select>
-                            </div>
-                            <div class="icon is-small is-left has-text-black">
-                                <i class="fa-solid fa-gavel"></i>
+                <div class="tile is-child">
+                    <div class="columns">
+                        <div class="column">
+                            <div class="control has-icons-left">
+                                <div class="select">
+                                    <select>
+                                        <option selected>Miecz</option>
+                                        <option>Topór</option>
+                                        <option>Łuk</option>
+                                    </select>
+                                </div>
+                                <div class="icon is-small is-left has-text-black">
+                                    <i class="fa-solid fa-gavel"></i>
+                                </div>
                             </div>
                         </div>
+                        <div class="column is-3">
+                            <div class="field is-grouped wounds-input">
+                                <div class="field has-addons">
+                                    <p class="control has-icons-left">
+                                        <input class="input no-border" v-model="data.stats.tempW" type="number">
+                                        <span class="icon is-small is-left has-text-dark">
+                                            <i v-if="data.stats.tempW == 0" class="fa-solid fa-heart-crack"></i>
+                                            <i v-else-if="data.stats.tempW <= (data.stats.w / 2)"
+                                                class="fa-solid fa-heart-pulse"></i>
+                                            <i v-else class="fa-solid fa-heart"></i>
+                                        </span>
+                                    </p>
+                                    <p class="control has-icons-left no-border">
+                                        <input class="input no-border" type="number" v-model="data.stats.w"
+                                            placeholder="Żywotność">
+                                        <span class="icon is-small is-left has-text-dark no-border">
+                                            <i class="fa-solid">/</i>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="control has-icons-left">
+                                <input class="input" type="number" v-model="data.stats.a" placeholder="A">
+                                <span class="icon is-left has-text-dark">
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="control has-icons-left">
+                                <input class="input" type="number" v-model="data.stats.m" placeholder="Sz">
+                                <span class="icon is-left has-text-dark">
+                                    <i class="fa-solid fa-gauge-high"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="control has-icons-left">
+                                <input class="input" type="number" v-model="data.stats.mag" placeholder="Mag">
+                                <span class="icon is-left has-text-dark">
+                                    <i class="fa-solid fa-hat-wizard"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="control has-icons-left">
+                                <input class="input" type="number" v-model="data.stats.ip" placeholder="PO">
+                                <span class="icon is-left has-text-dark">
+                                    <i class="fa-solid fa-head-side-virus"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="control has-icons-left">
+                                <input class="input" type="number" v-model="data.stats.fp" placeholder="PP">
+                                <span class="icon is-left has-text-dark">
+                                    <i class="fa-solid fa-head-side-virus"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tile is-child" v-if="isExpaned && !isDead">
+            <div class="tile box has-background-dark">
+                <div class="tile is-parent box is-horizontal">
+                    <div class="tile is-child p-2">
+                        <table class="table is-striped is-narrow">
+                            <thead>
+                                <tr>
+                                    <th class="attribute-name">Głowa</th>
+                                    <th class="attribute-name">Korpus</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="is-marginless is-paddingless">
+                                        <input type="number" class="input attribute-number" value="0">
+                                    </th>
+                                    <th class="is-marginless is-paddingless">
+                                        <input type="number" class="input attribute-number" value="0">
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table is-striped is-narrow">
+                            <thead>
+                                <tr>
+                                    <th class="attribute-name">L.&nbsp;Ręka</th>
+                                    <th class="attribute-name">P.&nbsp;Ręka</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="is-marginless is-paddingless">
+                                        <input type="number" class="input attribute-number" value="0">
+                                    </th>
+                                    <th class="is-marginless is-paddingless">
+                                        <input type="number" class="input attribute-number" value="0">
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table is-striped is-narrow">
+                            <thead>
+                                <tr>
+                                    <th class="attribute-name">L.&nbsp;Noga</th>
+                                    <th class="attribute-name">P.&nbsp;Noga</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="is-marginless is-paddingless">
+                                        <input type="number" class="input attribute-number" value="0">
+                                    </th>
+                                    <th class="is-marginless is-paddingless">
+                                        <input type="number" class="input attribute-number" value="0">
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tile is-child p-2">
+                        <div class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <p class="subtitle">Umiejętności</p>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <button class="button is-small is-info">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <Multiselect mode="multiple" v-model="testSkills" :options="testSkillsDb"
+                            :close-on-select="false" placeholder="Wybierz umiejętności" class="mb-4">
+                        </Multiselect>
+                        <div class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <p class="subtitle">Umiejętności</p>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <button class="button is-small is-info">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <Multiselect v-model="data.skills" placeholder="Wybierz zdolności" class="mb-4"></Multiselect>
+                    </div>
+                    <div class="tile is-child p-2">
+                        <p class="subtitle">Ekwipunek</p>
+                        <textarea class="textarea" rows="6" ref="output" v-model="data.equipment"></textarea>
+                    </div>
+                    <div class="tile is-child p-2">
+                        <p class="subtitle">Opis</p>
+                        <textarea class="textarea" rows="6" ref="output" v-model="data.description"></textarea>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 {
-  "name": "warhammer-isekai-easer",
+  "name": "warhammer-easer",
   "version": "2.0.0",
-  "description": "Potentialy powerful application created for RPG DM",
+  "description": "Potentialy powerful application created for real life tabletop RPG DM",
   "scripts": {
     "start": "npm run dev",
     "dev": "parcel source/index.html",
@@ -27,6 +27,7 @@
     "@parcel/diagnostic": "^2.3.2",
     "@parcel/transformer-sass": "^2.3.2",
     "@vue/compiler-sfc": "^3.2.31",
+    "@vueform/multiselect": "^2.3.3",
     "bulma-checkradio": "^2.1.3",
     "bulma-divider": "^0.2.0",
     "bulma-iconpicker": "^2.1.0",
@@ -35,7 +36,6 @@
     "jquery": "^3.6.0",
     "jquery-ui-dist": "^1.13.1",
     "parcel": "^2.0.0-rc.0",
-    "selectize": "^0.12.6",
     "vue": "3.2.31"
   }
 }

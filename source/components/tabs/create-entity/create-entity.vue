@@ -373,7 +373,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <select multiple placeholder="Wybierz umiejętności">
+                                    <select ref="skillsMultiselect" multiple placeholder="Wybierz umiejętności">
                                         <option value="1">Hazard</option>
                                         <option value="2">Hipnoza</option>
                                         <option value="3">Czytanie z Warg</option>
@@ -401,7 +401,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <select multiple placeholder="Wybierz zdolności">
+                                    <select ref="skillsMultiselect" multiple placeholder="Wybierz zdolności">
                                         <option value="1">Hazard</option>
                                         <option value="2">Hipnoza</option>
                                         <option value="3">Czytanie z Warg</option>

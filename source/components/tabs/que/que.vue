@@ -10,6 +10,9 @@
                 entities: [
                     {
                         name: "Hades",
+                        race: "Elf",
+                        description: "",
+                        equipment: "",
                         color: "#eb4034",
                         stats: {
                             ws: 10, // Weapon Skill
@@ -26,7 +29,9 @@
                             mag: 0, // Magic
                             ip: 0, // Instanity Points
                             fp: 1 // Fate Points
-                        }
+                        },
+                        skills: ['Spostrzegawczość'],
+                        abilities: ['Hazard', 'Hipnoza', 'Czytanie z Warg', 'Dowodzenie', 'Jeździectwo']
                     }
                 ]
             }
