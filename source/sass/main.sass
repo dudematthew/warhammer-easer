@@ -1,16 +1,16 @@
 $primary: #FFED7A
 $secondary-color: #246C8F
 $link: #A27A49
-    
+	
 $family-primary: "Segoe UI light"
 $background: #2A324B
 $body-background-color: #2A324B
 $dropdown-menu-min-width: 20rem
 $dark: #2A324B
 $box-padding: 0.4rem
-$tabs-toggle-link-active-border-color: $background
-$tabs-toggle-link-hover-border-color: $background
-$tabs-toggle-link-border-color: $background
+$tabs-toggle-link-active-border-color: $dark
+$tabs-toggle-link-hover-border-color: $dark
+$tabs-toggle-link-border-color: $dark
 
 @import ./imports
 @import ./animations
@@ -20,71 +20,78 @@ $tabs-toggle-link-border-color: $background
 // ----------------------------------------------
 
 textarea, input
-    outline: none
+	outline: none
+
+*::-webkit-scrollbar
+	width: 6px
+	background-color: $white
+
+*::-webkit-scrollbar-thumb
+	background-color: $dark
 
 .footer
-    border-bottom: 3px solid $link !important
+	border-bottom: 3px solid $link !important
 
 .option
-    cursor: pointer
+	cursor: pointer
 
 .is-secondary
-    background-color: #4ECDC4
+	background-color: #4ECDC4
 
 .no-select
-  user-select: none
-  -moz-user-select: none
-  -webkit-user-select: none
+	user-select: none
+	-moz-user-select: none
+	-webkit-user-select: none
 
 
 .navbar-dropdown
-    padding: 10px
-    min-width: 300px
+	padding: 10px
+	min-width: 300px
 
 .attribute-number
-    width: 100%
-    text-align: center
-    border: none
-    &:focus
-        outline: none
+	width: 100%
+	text-align: center
+	border: none
+	&:focus
+		outline: none
 
 .attribute-name
-    text-align: center
+	text-align: center
 
 textarea.attribute-number
-    resize: none
-    height: 4rem
-    
+	resize: none
+	height: 4rem
+	
 textarea.description-input
-    color: #000000 !important
-    resize: vertical !important
-    &:focus
-        outline: none
+	color: #000000 !important
+	resize: vertical !important
+	&:focus
+		outline: none
 
 input
-    &[type="color"]
-        min-width: 5rem
-    &[disabled]
-        background-color: white
+	&[type="color"]
+		min-width: 5rem
+	&[disabled]
+		background-color: white
 
 .tabs-content li.tab-content
-    display: none
-    list-style: none
+	display: none
+	list-style: none
 
 .tabs-content li.is-active.tab-content
-    display: block
+	display: block
 
 .tabs-content
-    border-top: 3px solid $link
+	border-top: 3px solid $link
 
 .tabs a
-    border: none !important
-    border-bottom-left-radius: 0 !important
-    border-bottom-right-radius: 0 !important
+	border: none !important
+	border-bottom-left-radius: 0 !important
+	border-bottom-right-radius: 0 !important
 
 textarea
-    margin-bottom: 0 !important
-    padding-bottom: 0 !important
+	margin-bottom: 0 !important
+	padding-bottom: 0 !important
 
 // .tabs-with-content .tabs:not(:last-child)
 //   margin-bottom: 0

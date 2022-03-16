@@ -1,29 +1,32 @@
 .has-background-danger
-    background-color: $danger
-    color: white !important
-    
+	background-color: $danger
+	color: white !important
+	
 a.has-background-danger:hover
-    background-color: darken($danger, 3%) !important
+	background-color: darken($danger, 3%) !important
 
 p[contenteditable]
-    padding: 2px 5px
-    &:focus
-        outline: 0px solid transparent
+	padding: 2px 5px
+	&:focus
+		outline: 0px solid transparent
 
 input:focus,
 select:focus,
 textarea:focus,
 button:focus 
-    outline: none
-    border-width: 0
+	outline: none
+	border-width: 0
 
 
 .no-border
-    border-color: transparent !important
-    border-width: 0 !important
-    outline: 0px solid transparent !important
-    &:focus
-        border: none !important
-        outline: 0px solid transparent !important
-        outline-width: 0 !important
-    
+	border-color: transparent !important
+	border-width: 0 !important
+	outline: 0px solid transparent !important
+	&:focus
+		border: none !important
+		outline: 0px solid transparent !important
+		outline-width: 0 !important
+
+.scrollable
+	overflow-y: auto
+	

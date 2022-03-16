@@ -30,8 +30,51 @@
                             ip: 0, // Instanity Points
                             fp: 1 // Fate Points
                         },
-                        skills: ['Spostrzegawczość'],
-                        abilities: ['Hazard', 'Hipnoza', 'Czytanie z Warg', 'Dowodzenie', 'Jeździectwo']
+                        skills: [
+                            {
+                                name: 'Spostrzegawczość',
+                                level: 0
+                            },
+                            {
+                                name: 'Hazard',
+                                level: 2
+                            },
+                            {
+                                name: 'Hipnoza',
+                                level: 1
+                            },
+                            {
+                                name:  'Czytanie z Warg',
+                                level: 0
+                            },
+                            {
+                                name: 'Dowodzenie',
+                                level: 2
+                            },
+                            {
+                                name: 'Jeździectwo',
+                                level: 1
+                            }
+                        ], // Skills
+                        talents: ['Silny Cios'], // Zdolności
+                        inventory: [
+                            {
+                                name: "Złoty Naszyjnik",
+                                description: "Pamiątka po wizycie w Estalii. Zapewnia + 10 do inteligencji."
+                            },
+                            {
+                                name: "Zestaw Wytrychów",
+                                description: ""
+                            },
+                            {
+                                name: "Racja Żywnościowa",
+                                description: "Starczy na dwa dni."
+                            },
+                            {
+                                name: "Butelka Wina",
+                                description: "Słabej jakości lura."
+                            }
+                        ]
                     }
                 ]
             }

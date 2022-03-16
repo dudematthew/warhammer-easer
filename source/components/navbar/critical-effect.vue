@@ -88,7 +88,7 @@
                         console.error(`Hit location is not valid (${selectedHitLocation})`);
                 }
                 
-                this.output += `🎲 [${d100Throw}] ${hitEmoji} ${hitLocationName} \n`;
+                this.output += `🎲 [${d100Throw}] [+${this.selectedCriticalValue}] ${hitEmoji} ${hitLocationName} \n`;
                 this.output += `${effect}\n`;
             },
             scrollOutputToBottom() {
