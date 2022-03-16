@@ -1,9 +1,7 @@
 node_modules
-lib
 .cache
 .vscode
 dist
 concept.txt
-old
 package-lock.json
 .parcel-cache
