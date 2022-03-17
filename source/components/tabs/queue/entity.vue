@@ -1,10 +1,14 @@
 <script>
 	import Multiselect from '@vueform/multiselect';
 
+	// https://github.com/SortableJS/vue.draggable.next
+	import Draggable from 'vuedraggable';
+
 	export default {
 		props: ['data'],
 		components: {
-			Multiselect
+			Multiselect,
+			Draggable
 		},
 		data() {
 			return {
@@ -24,11 +28,11 @@
 			this.setRandomInitiative();
 			this.data.stats.tempW = this.data.stats.w;
 
-			let thisTest = this;
+			// let thisTest = this;
 
-			setInterval(() => {
-				console.log(thisTest.testSkills, thisTest.testSkillsDb);
-			}, 5000);
+			// setInterval(() => {
+			// 	console.log(thisTest.data.inventory);
+			// }, 5000);
 		},
 		methods: {
 			handleNameInput(e) {
@@ -410,7 +414,7 @@
 								<div class="level-item">
 									<button class="button is-small is-link">
 										<span class="icon is-small">
-											<i class="fa-solid fa-pen"></i>
+											<i class="fa-solid fa-plus"></i>
 										</span>
 									</button>
 								</div>
@@ -440,7 +444,7 @@
 								<div class="level-item">
 									<button class="button is-small is-link">
 										<span class="icon is-small">
-											<i class="fa-solid fa-pen"></i>
+											<i class="fa-solid fa-plus"></i>
 										</span>
 									</button>
 								</div>
@@ -467,7 +471,7 @@
 								<div class="level-item">
 									<button class="button is-small is-link">
 										<span class="icon is-small">
-											<i class="fa-solid fa-pen"></i>
+											<i class="fa-solid fa-plus"></i>
 										</span>
 									</button>
 								</div>
@@ -476,7 +480,40 @@
 								</div>
 							</div>
 						</div>
-						<div class="box scrollable" style="height: 230px">
+						<div class="box scrollable" style="height: 275px; resize: vertical">
+							<Draggable v-model="data.inventory" group="inventory" @start="drag=true" @end="drag=false"
+								item-key="id">
+								<template #item="{element}">
+									<div class="box is-fullwidth m-1">
+										<!-- Main container -->
+										<nav class="level mb-0" style="white-space: wrap">
+											<!-- Left side -->
+											<div class="level-left">
+												<div class="level-item m-0">
+													<span class="icon has-text-link">
+														<i class="fa-solid fa-suitcase"></i>
+													</span>
+												</div>
+												<div class="level-item" style="white-space: wrap">
+													<span class="has-text-weight-bold ml-1">{{element.name}}</span>
+												</div>
+											</div>
+
+											<!-- Right side -->
+											<div class="level-right">
+												<p class="level-item">
+													<button class="delete is-small has-background-danger"></button>
+												</p>
+											</div>
+										</nav>
+										<p v-if="element.description != ''">
+											{{element.description}}
+										</p>
+									</div>
+								</template>
+							</Draggable>
+						</div>
+						<div class="box scrollable is-hidden" style="height: 230px; resize: vertical">
 							<div class="box is-fullwidth m-1" v-for="(item, index) in data.inventory" :key="index">
 								<!-- Main container -->
 								<nav class="level mb-0" style="white-space: wrap">
@@ -516,23 +553,75 @@
 						</nav> -->
 						<!-- <textarea class="textarea is-small" rows="10" ref="output" v-model="data.equipment"></textarea> -->
 					</div>
-					<div class="tile is-child p-2">
-						<div class="level mb-2">
+					<div class="tile is-child p-2 block">
+						<!-- <textarea class="textarea is-small" rows="10" ref="output"
+							v-model="data.description"></textarea> -->
+						<!-- Main container -->
+						<nav class="level mb-1">
+							<!-- Left side -->
 							<div class="level-left">
 								<div class="level-item">
-									<button class="button is-small is-link">
-										<span class="icon is-small">
-											<i class="fa-solid fa-plus"></i>
-										</span>
-									</button>
-								</div>
-								<div class="level-item">
-									<p class="subtitle">Opis</p>
+									<p class="subtitle mb-2">Opis</p>
 								</div>
 							</div>
+
+							<!-- Right side -->
+							<div class="level-right">
+								<p class="level-item">
+									<span class="has-tooltip-arrow has-tooltip-left"
+										data-tooltip="Możesz dodać nowy opis przyciskiem lub ctrl + enter&#10;Wprowadzony tekst do pierwszego złamania linii jest tytułem opisu">
+										<span class="icon is-small has-text-info">
+											<i class="fa-solid fa-circle-info"></i>
+										</span>
+									</span>
+								</p>
+							</div>
+						</nav>
+						<div class="field has-addons">
+							<div class="control is-expanded">
+								<textarea class="input is-fullwidth" type="text" placeholder="Dodaj opis"
+									style="resize: vertical"></textarea>
+							</div>
+							<div class="control">
+								<a class="button is-link">
+									<span class="icon is-small">
+										<i class="fa-solid fa-plus"></i>
+									</span>
+								</a>
+							</div>
 						</div>
-						<textarea class="textarea is-small" rows="10" ref="output"
-							v-model="data.description"></textarea>
+						<div class="box scrollable" style="height: 230px; resize: vertical">
+							<draggable v-model="data.description" tag="description" item-key="id">
+								<template #item="{element}">
+									<div class="box is-fullwidth m-1">
+										<!-- Main container -->
+										<nav class="level mb-0" style="white-space: wrap">
+											<!-- Left side -->
+											<div class="level-left">
+												<div class="level-item m-0">
+													<span class="icon has-text-link">
+														<i class="fa-solid fa-circle-info"></i>
+													</span>
+												</div>
+												<div class="level-item" style="white-space: wrap">
+													<span class="has-text-weight-bold ml-1">{{element.name}}</span>
+												</div>
+											</div>
+
+											<!-- Right side -->
+											<div class="level-right">
+												<p class="level-item">
+													<button class="delete is-small has-background-danger"></button>
+												</p>
+											</div>
+										</nav>
+										<p v-if="element.text != ''">
+											{{element.text}}
+										</p>
+									</div>
+								</template>
+							</draggable>
+						</div>
 					</div>
 				</div>
 			</div>

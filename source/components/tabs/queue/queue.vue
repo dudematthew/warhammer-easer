@@ -74,6 +74,12 @@
                                 name: "Butelka Wina",
                                 description: "Słabej jakości lura."
                             }
+                        ],
+                        description: [
+                            {
+                                name: "Mieszkaniec Lasu",
+                                text: "Zwierzoludzie to stwory leśne. Niemal wszyscy są doświadczonymi łowcami i tropicielami. Otrzymują modyfikator +20 do testów skradania się oraz +10 do testów ukrywania się w lesie."
+                            }
                         ]
                     }
                 ]

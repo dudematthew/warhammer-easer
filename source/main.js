@@ -18,7 +18,7 @@ window.$ = window.jQuery = require("jquery");
 import { createApp } from 'vue';
 
 // https://github.com/vueform/multiselect
-import '@vueform/multiselect'
+import '@vueform/multiselect';
 
 // https://bulmajs.tomerbe.co.uk/docs
 import Bulma from '@vizuaalog/bulmajs';
