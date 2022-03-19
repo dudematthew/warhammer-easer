@@ -1,5 +1,5 @@
 <script>
-    import Entity from './entity.vue';
+    import Entity from './entity/entity.vue';
 
     export default {
         components: {
@@ -77,9 +77,43 @@
                         ],
                         description: [
                             {
-                                name: "Mieszkaniec Lasu",
-                                text: "Zwierzoludzie to stwory leśne. Niemal wszyscy są doświadczonymi łowcami i tropicielami. Otrzymują modyfikator +20 do testów skradania się oraz +10 do testów ukrywania się w lesie."
+                                name: "Mieszkaniec lasu",
+                                description: "Zwierzoludzie to stwory leśne. Niemal wszyscy są doświadczonymi łowcami i tropicielami. Otrzymują modyfikator +20 do testów skradania się oraz +10 do testów ukrywania się w lesie."
+                            },
+                            {
+                                name: "Guuupi!",
+                                description: ""
+                            },
+                            {
+                                name: "Opancerzony korpus",
+                                description: "Byko-centaury noszą pancerz tylko na górnej (krasnoludzkiej) części korpusu. Jęsli stosujesz zasady dotyczące opancerzenia złożonego, instnieje zaledwie 50% szans, że cios zadany w korpus trafi w zbroję. Bykocentaury nie mogą nosić pancerza na nogach."
                             }
+                        ],
+                        spells: [
+                            {
+                                name: "Błyskawica",
+                                description: "Czarodziej ciska błyskawicą w dowolnego przeciwnika znajdującego się w odległości do 36 metrów. Jest to magiczny pocisk o Sile 5.",
+                                ingredient: "kamerton (+2)",
+                                castingTime: "akcja",
+                                duration: "",
+                                level: 10
+                            },
+                            {
+                                name: "Mowa ptaków",
+                                description: "Czarodziej zyskuje umiejętność rozumienia i przemawiania w języku ptaków. Oczywiście ptaki nie muszą rozmawiać z czarodziejem, ani odpowiadać na jego pytania (decyzja MG). Sprytne lub wyjątkowo inteligentne ptaki mogą nawet kłamać lub żądać przysługi w zamian za informację. Każdy z ptaków będzie oceniał czarodzieja po jego wyglądzie i sposobie zachowania, jednakże dzięki temu zaklęciu czarodziej zyskuje instynktowną wiedzę o zachowaniu ptaków. Na przykład, może się dowiedzieć dlaczego stado ptaków zachowuje się w określony sposób lub z jakiego powodu napotkane gniazdo zostało opuszczone.",
+                                ingredient: "ptasi język (+1)",
+                                castingTime: "akcja podwójna",
+                                duration: "liczba minut równa wartości Magii czarodzieja",
+                                level: 10
+                            },
+                            {
+                                name: "Wypolerowanie",
+                                description: "Czar umożliwia oczyszczenie i wypolerowanie dowolnego przedmiotu służącego do obserwacji - szyby okiennej, lunety, lustra itp. Młodzi adepci magii z Kolegium Niebios potajemnie używają tego zaklęcia do czyszczenia instrumentów używanych przez starszych astrologów do obserwacji nieba. Ponieważ wykorzystywanie magii do codziennych czynności jest zabronione, uczniowie rzucają to zaklęcie, a następnie lekko przecierają idealnie lśniącą powierzchnię brudną szmatą, aby zamaskować magiczny efekt zaklęcia.",
+                                ingredient: "czysta szmatka (+1)",
+                                castingTime: "akcja",
+                                duration: "",
+                                level: 4
+                            },
                         ]
                     }
                 ]

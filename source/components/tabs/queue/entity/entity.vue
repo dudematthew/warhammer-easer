@@ -1,6 +1,8 @@
 <script>
 	import Multiselect from '@vueform/multiselect';
 
+	import Item from './item.vue';
+
 	// https://github.com/SortableJS/vue.draggable.next
 	import Draggable from 'vuedraggable';
 
@@ -8,7 +10,8 @@
 		props: ['data'],
 		components: {
 			Multiselect,
-			Draggable
+			Draggable,
+			Item
 		},
 		data() {
 			return {
@@ -59,7 +62,8 @@
 				<div class="level-left">
 					<div class="level-item">
 						<p class="icon is-large title">
-							<i v-if="data.stats.tempW == 0" class="fa-solid fa-user-injured"></i>
+							<i v-if="isDead" class="fa-solid fa-user-slash"></i>
+							<i v-else-if="data.stats.tempW == 0" class="fa-solid fa-user-injured"></i>
 							<i v-else class="fa-solid fa-user"></i>
 						</p>
 					</div>
@@ -93,7 +97,7 @@
 							</span>
 						</button>
 					</p>
-					<p class="level-item" v-if="!isDead">
+					<p class="level-item">
 						<button class="button is-danger">
 							<span class="icon is-small">
 								<i class="fas fa-trash"></i>
@@ -270,16 +274,25 @@
 							</p>
 						</div>
 						<div class="column">
-							<div class="control has-icons-left">
-								<div class="select">
-									<select>
-										<option selected>Miecz</option>
-										<option>Topór</option>
-										<option>Łuk</option>
-									</select>
+							<div class="field has-addons">
+								<div class="control has-icons-left">
+									<div class="select">
+										<select>
+											<option selected>Miecz</option>
+											<option>Topór</option>
+											<option>Łuk</option>
+										</select>
+									</div>
+									<div class="icon is-small is-left has-text-black">
+										<i class="fa-solid fa-gavel"></i>
+									</div>
 								</div>
-								<div class="icon is-small is-left has-text-black">
-									<i class="fa-solid fa-gavel"></i>
+								<div class="control">
+									<a class="button is-link">
+										<div class="icon is-small">
+											<i class="fa-solid fa-gears"></i>
+										</div>
+									</a>
 								</div>
 							</div>
 						</div>
@@ -408,7 +421,7 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="tile is-child is-5 p-2">
+					<div class="tile is-child is-4 p-2">
 						<div class="level mb-3">
 							<div class="level-left">
 								<div class="level-item">
@@ -465,7 +478,7 @@
 							Ta postać nie ma zdolności.
 						</div>
 					</div>
-					<div class="tile is-child p-2">
+					<div class="tile is-child p-2" v-if="data.stats.mag > 0">
 						<div class="level mb-2">
 							<div class="level-left">
 								<div class="level-item">
@@ -476,40 +489,15 @@
 									</button>
 								</div>
 								<div class="level-item">
-									<p class="subtitle">Ekwipunek</p>
+									<p class="subtitle">Księga Zaklęć</p>
 								</div>
 							</div>
 						</div>
 						<div class="box scrollable" style="height: 275px; resize: vertical">
-							<Draggable v-model="data.inventory" group="inventory" @start="drag=true" @end="drag=false"
+							<Draggable v-model="data.spells" group="inventory" @start="drag=true" @end="drag=false"
 								item-key="id">
 								<template #item="{element}">
-									<div class="box is-fullwidth m-1">
-										<!-- Main container -->
-										<nav class="level mb-0" style="white-space: wrap">
-											<!-- Left side -->
-											<div class="level-left">
-												<div class="level-item m-0">
-													<span class="icon has-text-link">
-														<i class="fa-solid fa-suitcase"></i>
-													</span>
-												</div>
-												<div class="level-item" style="white-space: wrap">
-													<span class="has-text-weight-bold ml-1">{{element.name}}</span>
-												</div>
-											</div>
-
-											<!-- Right side -->
-											<div class="level-right">
-												<p class="level-item">
-													<button class="delete is-small has-background-danger"></button>
-												</p>
-											</div>
-										</nav>
-										<p v-if="element.description != ''">
-											{{element.description}}
-										</p>
-									</div>
+									<Item :data="element" icon="fa-solid fa-wand-magic"></Item>
 								</template>
 							</Draggable>
 						</div>
@@ -541,16 +529,59 @@
 								</p>
 							</div>
 						</div>
-						<!-- <nav class="panel scrollable" style="height: 230px;">
-							<a class="panel-block is-active is-light" v-for="(item, index) in data.inventory" :key="index">
-								<span class="panel-icon">
-									<i class="fas fa-book" aria-hidden="true"></i>
-								</span>
-								{{item.name}}
-								<br>
-								{{item.description}}
-							</a>
-						</nav> -->
+						<!-- <textarea class="textarea is-small" rows="10" ref="output" v-model="data.equipment"></textarea> -->
+					</div>
+					<div class="tile is-child p-2">
+						<div class="level mb-2">
+							<div class="level-left">
+								<div class="level-item">
+									<button class="button is-small is-link">
+										<span class="icon is-small">
+											<i class="fa-solid fa-plus"></i>
+										</span>
+									</button>
+								</div>
+								<div class="level-item">
+									<p class="subtitle">Ekwipunek</p>
+								</div>
+							</div>
+						</div>
+						<div class="box scrollable" style="height: 275px; resize: vertical">
+							<Draggable v-model="data.inventory" group="inventory" @start="drag=true" @end="drag=false"
+								item-key="id">
+								<template #item="{element}">
+									<Item :data="element" icon="fa-solid fa-suitcase"></Item>
+								</template>
+							</Draggable>
+						</div>
+						<div class="box scrollable is-hidden" style="height: 230px; resize: vertical">
+							<div class="box is-fullwidth m-1" v-for="(item, index) in data.inventory" :key="index">
+								<!-- Main container -->
+								<nav class="level mb-0" style="white-space: wrap">
+									<!-- Left side -->
+									<div class="level-left">
+										<div class="level-item">
+											<span class="icon has-text-link">
+												<i class="fa-solid fa-suitcase"></i>
+											</span>
+										</div>
+										<div class="level-item" style="white-space: wrap">
+											<span class="has-text-weight-bold ml-1">{{item.name}}</span>
+										</div>
+									</div>
+
+									<!-- Right side -->
+									<div class="level-right">
+										<p class="level-item">
+											<button class="delete is-small has-background-danger"></button>
+										</p>
+									</div>
+								</nav>
+								<p v-if="item.description != ''">
+									{{item.description}}
+								</p>
+							</div>
+						</div>
 						<!-- <textarea class="textarea is-small" rows="10" ref="output" v-model="data.equipment"></textarea> -->
 					</div>
 					<div class="tile is-child p-2 block">
@@ -569,7 +600,7 @@
 							<div class="level-right">
 								<p class="level-item">
 									<span class="has-tooltip-arrow has-tooltip-left"
-										data-tooltip="Możesz dodać nowy opis przyciskiem lub ctrl + enter&#10;Wprowadzony tekst do pierwszego złamania linii jest tytułem opisu">
+										data-tooltip="Możesz dodać nowy opis przyciskiem + lub ctrl+enter&#10;Wprowadzony tekst do pierwszego złamania linii jest tytułem opisu">
 										<span class="icon is-small has-text-info">
 											<i class="fa-solid fa-circle-info"></i>
 										</span>
@@ -593,32 +624,7 @@
 						<div class="box scrollable" style="height: 230px; resize: vertical">
 							<draggable v-model="data.description" tag="description" item-key="id">
 								<template #item="{element}">
-									<div class="box is-fullwidth m-1">
-										<!-- Main container -->
-										<nav class="level mb-0" style="white-space: wrap">
-											<!-- Left side -->
-											<div class="level-left">
-												<div class="level-item m-0">
-													<span class="icon has-text-link">
-														<i class="fa-solid fa-circle-info"></i>
-													</span>
-												</div>
-												<div class="level-item" style="white-space: wrap">
-													<span class="has-text-weight-bold ml-1">{{element.name}}</span>
-												</div>
-											</div>
-
-											<!-- Right side -->
-											<div class="level-right">
-												<p class="level-item">
-													<button class="delete is-small has-background-danger"></button>
-												</p>
-											</div>
-										</nav>
-										<p v-if="element.text != ''">
-											{{element.text}}
-										</p>
-									</div>
+									<Item :data="element" icon="fa-solid fa-circle-info"></Item>
 								</template>
 							</draggable>
 						</div>
